@@ -44,7 +44,7 @@ public class ItemControl extends HttpServlet {
         ItemDB itemdb = new ItemDB();
        System.out.println(action);
         
-        if("additem".equals(action)){
+        if("additem".equals(action)  || "additem"==action){
             
             String name = request.getParameter("name");
             String description = request.getParameter("description");
@@ -62,19 +62,21 @@ public class ItemControl extends HttpServlet {
                 itemdb.insertItem(name, description, price, type, inputStream, user_id);
                 url="/add_item.jsp";
                 request.setAttribute("message","Item added succesfully");
-            } catch (SQLException ex) {
-                Logger.getLogger(ItemControl.class.getName()).log(Level.SEVERE, null, ex);
-                url="/add_item.jsp";
-                request.setAttribute("message","Item not added");
-            } catch (ClassNotFoundException ex) {
+            }
+            catch (ClassNotFoundException ex) {
                 Logger.getLogger(ItemControl.class.getName()).log(Level.SEVERE, null, ex);
                 url="/add_item.jsp";
                 request.setAttribute("message","Item not added");
             }
+             catch (SQLException ex) {
+                Logger.getLogger(ItemControl.class.getName()).log(Level.SEVERE, null, ex);
+                url="/add_item.jsp";
+                request.setAttribute("message","Item not added");
+            } 
              
                 
         }
-        else if("updateItemStatus".equals(action)){
+        else if("updateItemStatus".equals(action) || "updateItemStatus"==action){
             int id = Integer.parseInt(request.getParameter("id"));
             try {
                 user =(User) request.getSession().getAttribute("user");
@@ -87,7 +89,7 @@ public class ItemControl extends HttpServlet {
             
     }
         
-        else if(action.equals("removeItem")){
+        else if(action.equals("removeItem")  || "removeItem"==action){
             int id = Integer.parseInt(request.getParameter("id"));
             try {
                 itemdb.removeItemFromCart(id);
@@ -99,7 +101,7 @@ public class ItemControl extends HttpServlet {
             }
     }
      
-        else if(action.equals("deleteItem")){
+        else if(action.equals("deleteItem")  || "deleteItem"==action){
             int id = Integer.parseInt(request.getParameter("id"));
             try {
                 itemdb.deleteItem(id);

@@ -39,7 +39,7 @@ public class ItemController extends HttpServlet {
         ItemDB itemdb = new ItemDB();
        System.out.println(action);
         
-        if("additem".equals(action)){
+        if("additem".equals(action)  || "additem"==action){
             
             String name = request.getParameter("name");
             String description = request.getParameter("description");
@@ -75,7 +75,7 @@ public class ItemController extends HttpServlet {
                 
         }
         
-       else if("updateItemStatus".equals(action)){
+       else if("updateItemStatus".equals(action)  || "updateItemStatus"==action){
             int id = Integer.parseInt(request.getParameter("id"));
             try {
                 user =(User) request.getSession().getAttribute("user");
@@ -86,8 +86,7 @@ public class ItemController extends HttpServlet {
                 Logger.getLogger(ItemController.class.getName()).log(Level.SEVERE, null, ex);
             }
             
-    }
-        
+    }       
         
         getServletContext().getRequestDispatcher(url).forward(request,response);
     }
